@@ -9,8 +9,8 @@ import groovy.xml.MarkupBuilder
 
 @Slf4j
 class Crawler {
-            LinkParser linkParser
-            PageLoader pageLoader
+    LinkParser linkParser
+    PageLoader pageLoader
 
     Crawler(PageLoader pageLoader, LinkParser linkParser) {
         this.linkParser = linkParser
