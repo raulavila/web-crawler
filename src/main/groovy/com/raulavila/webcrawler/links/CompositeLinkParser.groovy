@@ -1,4 +1,4 @@
-package com.raulavila.webcrawler
+package com.raulavila.webcrawler.links
 
 class CompositeLinkParser implements LinkParser{
     

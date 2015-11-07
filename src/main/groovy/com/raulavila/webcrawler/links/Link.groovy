@@ -1,9 +1,9 @@
-package com.raulavila.webcrawler
+package com.raulavila.webcrawler.links
 
 import groovy.transform.Canonical
 
 @Canonical
 class Link {
-    String type
+    LinkType type
     String url
 }

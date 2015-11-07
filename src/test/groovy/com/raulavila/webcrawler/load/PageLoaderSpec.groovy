@@ -1,4 +1,4 @@
-package com.raulavila.webcrawler
+package com.raulavila.webcrawler.load
 
 import spock.lang.Specification
 

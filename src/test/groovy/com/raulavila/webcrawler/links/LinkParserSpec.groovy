@@ -1,4 +1,4 @@
-package com.raulavila.webcrawler
+package com.raulavila.webcrawler.links
 
 import spock.lang.Specification
 import spock.lang.Subject
@@ -46,7 +46,7 @@ class LinkParserSpec extends Specification {
         then: "a list with one link is returned"
         links.size() == 1
         and: "the link contains the information extracted from the page"
-        links.contains(new Link(type: "Normal", url: "http://www.google.com"))
+        links.contains(new Link(type: LinkType.NORMAL, url: "http://www.google.com"))
     }
 
     def "Parse normal links from page with more than one link"() {
@@ -70,8 +70,8 @@ class LinkParserSpec extends Specification {
         then: "a list with 3 links is returned"
         links.size() == 3
         and: "the links contain the information extracted from the page"
-        links.contains(new Link(type: "Normal", url: "http://www.google.com"))
-        links.contains(new Link(type: "Normal", url: "http://www.raulavila.com"))
-        links.contains(new Link(type: "Normal", url: "http://wiprodigital.com"))
+        links.contains(new Link(type: LinkType.NORMAL, url: "http://www.google.com"))
+        links.contains(new Link(type: LinkType.NORMAL, url: "http://www.raulavila.com"))
+        links.contains(new Link(type: LinkType.NORMAL, url: "http://wiprodigital.com"))
     }
 }

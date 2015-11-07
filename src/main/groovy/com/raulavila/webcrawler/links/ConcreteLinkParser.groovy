@@ -1,4 +1,4 @@
-package com.raulavila.webcrawler
+package com.raulavila.webcrawler.links
 
 class ConcreteLinkParser implements LinkParser {
 
@@ -14,6 +14,5 @@ class ConcreteLinkParser implements LinkParser {
                     linkConfig.filterClosure)
             .collect(
                     linkConfig.extractClosure)
-        
     }
 }

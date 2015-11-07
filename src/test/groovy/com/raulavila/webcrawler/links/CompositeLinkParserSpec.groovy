@@ -1,4 +1,4 @@
-package com.raulavila.webcrawler
+package com.raulavila.webcrawler.links
 
 import spock.lang.Specification
 import spock.lang.Subject
@@ -40,9 +40,9 @@ class CompositeLinkParserSpec extends Specification {
         then: "a list with 3 links is returned"
         links.size() == 3
         and: "the links contain the information extracted from the page"
-        links.contains(new Link(type: "CSS", url: "stylesheet.css"))
-        links.contains(new Link(type: "Normal", url: "http://www.google.com"))
-        links.contains(new Link(type: "Image", url: "image.jpg"))
+        links.contains(new Link(type: LinkType.CSS, url: "stylesheet.css"))
+        links.contains(new Link(type: LinkType.NORMAL, url: "http://www.google.com"))
+        links.contains(new Link(type: LinkType.IMAGE, url: "image.jpg"))
     }
 
 }
