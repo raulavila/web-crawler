@@ -9,8 +9,8 @@ import groovy.xml.MarkupBuilder
 
 @Slf4j
 class Crawler {
-    LinkParser linkParser
-    PageLoader pageLoader
+            LinkParser linkParser
+            PageLoader pageLoader
 
     Crawler(PageLoader pageLoader, LinkParser linkParser) {
         this.linkParser = linkParser
@@ -22,6 +22,7 @@ class Crawler {
         def markup = new MarkupBuilder(writer)
 
         Set<Link> visitedLinks = new HashSet<>()
+        visitedLinks.add(new Link(type: LinkType.NORMAL, url: rootUrl))
 
         String pageTitle = "Map of the site $rootUrl"
         
@@ -61,7 +62,7 @@ class Crawler {
         }
     }
 
-    boolean shouldVisitLink(Link link, String rootUrl, Set<Link> visitedLinks) {
+    private boolean shouldVisitLink(Link link, String rootUrl, Set<Link> visitedLinks) {
         link.type == LinkType.NORMAL &&
                 link.url.contains(rootUrl) &&
                 !visitedLinks.contains(link)
