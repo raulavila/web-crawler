@@ -22,7 +22,7 @@ class CompositeLinkParserSpec extends Specification {
     def "Parse different types of links from page"() {
         given: "We have an HTML page with several types of links"
         def html = new XmlSlurper().parseText(
-                """
+            """
             <html>
                 <link rel='stylesheet' href='stylesheet.css'/>
                 <body>

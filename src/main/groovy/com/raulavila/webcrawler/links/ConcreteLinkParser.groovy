@@ -11,10 +11,8 @@ class ConcreteLinkParser implements LinkParser {
     @Override
     Set<Link> parse(def html) {
         html."**"
-            .findAll(
-                    linkConfig.filterClosure)
-            .collect(
-                    linkConfig.extractClosure) as LinkedHashSet
+            .findAll(linkConfig.filterClosure)
+            .collect(linkConfig.extractClosure) as LinkedHashSet
 
     }
 }
