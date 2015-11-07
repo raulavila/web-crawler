@@ -1,7 +1,13 @@
 apply plugin: 'groovy'
-apply plugin: 'application'
 
+apply plugin: 'application'
 mainClassName = 'com.raulavila.webcrawler.App'
+
+run {
+    if (project.hasProperty("arguments")) {
+        args Eval.me(arguments)
+    }
+}
 
 repositories {
     mavenCentral()

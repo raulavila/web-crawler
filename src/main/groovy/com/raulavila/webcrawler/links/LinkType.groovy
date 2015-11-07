@@ -5,8 +5,7 @@ enum LinkType {
             { 
              it.name().toUpperCase() == "A" &&
              !it.@href.text().isEmpty() &&
-             !it.@href.text().startsWith("#") &&
-             !it.@href.text().startsWith("/#")
+             !it.@href.text().startsWith("#")
             },
             { 
              new Link(type: LinkType.NORMAL,

@@ -8,19 +8,17 @@ import com.raulavila.webcrawler.load.PageLoader
 
 class App {
     public static void main(String[] args) {
-        if (args.length == 0) {
-            println "Missing parameters! Usage: gradlew run <rootUri>"
+        if (args.length != 1) {
+            println "Incorrect arguments! Usage: gradlew run <rootUri>"
             System.exit(0)
         }
 
         String rootUrl = args[0]
-
+        
         Crawler crawler = getCrawler()
         String crawl = crawler.crawl(rootUrl)
 
-        new File('siteMap.html').write(crawl)
-
-        println rootUrl
+        new File("siteMap.html").write(crawl)
     }
 
     private static Crawler getCrawler() {

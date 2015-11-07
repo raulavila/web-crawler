@@ -44,6 +44,8 @@ class Crawler {
 
         markup.ul {
             for(link in links) {
+                checkRelativeInternal(link, rootUrl)
+                
                 li {
                     span("$link.type.description: ")
                     a(href:"$link.url","$link.url" )
@@ -58,6 +60,14 @@ class Crawler {
                         log.warn("Problems visiting page " + link.url)
                     }
                 }
+            }
+        }
+    }
+
+    def checkRelativeInternal(Link link, String rootUrl) {
+        if (link.type == LinkType.NORMAL) {
+            if (link.url.startsWith("/")) {
+                link.url = rootUrl + link.url
             }
         }
     }

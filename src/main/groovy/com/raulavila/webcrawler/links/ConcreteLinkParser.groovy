@@ -8,6 +8,7 @@ class ConcreteLinkParser implements LinkParser {
         this.linkConfig = linkConfig
     }
 
+    @Override
     Set<Link> parse(def html) {
         html."**"
             .findAll(

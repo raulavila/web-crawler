@@ -27,7 +27,7 @@ class CrawlerSpec extends Specification {
 
     def "test"() {
         given: "root contains a link to page1"
-        Set<Link> linksRoot = [new Link(type: LinkType.NORMAL, url: "http://root/page1")]
+        Set<Link> linksRoot = [new Link(type: LinkType.NORMAL, url: "/page1")]
         linkParser.parse(rootPage) >> linksRoot
         and: "page1 contains a link to root"
         Set<Link> linksPage1 = [new Link(type: LinkType.NORMAL, url: "http://root")]
