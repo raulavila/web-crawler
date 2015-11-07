@@ -11,6 +11,12 @@ enum LinkType {
                 new Link(type: "Image",
                         url: it.@src.text())
             }),
+    CSS({ it.name().toUpperCase() == "LINK" && it.@rel == "stylesheet"},
+            {
+                new Link(type: "CSS",
+                        url: it.@href.text())
+            });
+    
 
     final Closure filterClosure
     final Closure extractClosure

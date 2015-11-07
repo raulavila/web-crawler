@@ -49,4 +49,25 @@ class LinkConfigSpec extends Specification {
         and: "the link contains the information extracted from the page"
         links.contains(new Link(type: "Image", url: "image.jpg"))
     }
+
+    def "Extract CSS links from page"() {
+        given: "We instantiate a LinkParser for CSS links"
+        LinkParser linkParser = new LinkParser(LinkType.CSS)
+        and: "we have an HTML page with one stylesheet link"
+        def html = new XmlSlurper().parseText(
+                """
+            <html>
+                <link rel='stylesheet' href='stylesheet.css'/>
+            </html>
+            """
+        )
+
+        when: "We try to parse links from this page"
+        List<String> links = linkParser.parse(html)
+
+        then: "a list with one link is returned"
+        links.size() == 1
+        and: "the link contains the information extracted from the page"
+        links.contains(new Link(type: "CSS", url: "stylesheet.css"))
+    }
 }
