@@ -6,23 +6,34 @@ import com.raulavila.webcrawler.links.LinkParser
 import com.raulavila.webcrawler.links.LinkType
 import com.raulavila.webcrawler.load.PageLoader
 
-class Main {
-
+class App {
     public static void main(String[] args) {
-        PageLoader pageLoader1 = new PageLoader()
+        if (args.length == 0) {
+            println "Missing parameters! Usage: gradlew run <rootUri>"
+            System.exit(0)
+        }
+
+        String rootUrl = args[0]
+
+        Crawler crawler = getCrawler()
+        String crawl = crawler.crawl(rootUrl)
+
+        new File('siteMap.html').write(crawl)
+
+        println rootUrl
+    }
+
+    private static Crawler getCrawler() {
+        PageLoader pageLoader = new PageLoader()
 
         List<LinkParser> linkParsers = new ArrayList<>()
-
         for (LinkType linkType : LinkType.values()) {
             LinkParser linkParser = new ConcreteLinkParser(linkType)
             linkParsers << linkParser
         }
-
         CompositeLinkParser compositeLinkParser = new CompositeLinkParser(linkParsers)
 
-        def crawler = new Crawler(pageLoader1, compositeLinkParser)
-        def crawl = crawler.crawl("http://wiprodigital.com")
-
-        new File('output.html').write(crawl)
+        Crawler crawler = new Crawler(pageLoader, compositeLinkParser)
+        crawler
     }
 }
