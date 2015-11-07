@@ -19,7 +19,7 @@ class PageLoaderSpec extends Specification {
 
     private def findTag(html, name) {
         def tags = html."**".findAll {
-            it.name() == name.toUpperCase()
+            it.name().toUpperCase() == name.toUpperCase()
         }
         
         assert tags.size() == 1
