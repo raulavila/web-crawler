@@ -19,6 +19,8 @@ class App {
         String crawl = crawler.crawl(rootUrl)
 
         new File("siteMap.html").write(crawl)
+        
+        println "SiteMap generated in file siteMap.html"
     }
 
     private static Crawler getCrawler() {
