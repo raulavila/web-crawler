@@ -20,7 +20,7 @@ class LinkConfigSpec extends Specification {
         )
 
         when: "We try to parse links from this page"
-        List<Link> links = linkParser.parse(html)
+        Set<Link> links = linkParser.parse(html)
 
         then: "a list with one link is returned"
         links.size() == 1
@@ -43,7 +43,7 @@ class LinkConfigSpec extends Specification {
         )
 
         when: "We try to parse links from this page"
-        List<Link> links = linkParser.parse(html)
+        Set<Link> links = linkParser.parse(html)
 
         then: "a list with one link is returned"
         links.size() == 1
@@ -64,7 +64,7 @@ class LinkConfigSpec extends Specification {
         )
 
         when: "We try to parse links from this page"
-        List<Link> links = linkParser.parse(html)
+        Set<Link> links = linkParser.parse(html)
 
         then: "a list with one link is returned"
         links.size() == 1

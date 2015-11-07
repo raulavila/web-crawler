@@ -1,6 +1,6 @@
 package com.raulavila.webcrawler.links
 
-class CompositeLinkParser implements LinkParser{
+class CompositeLinkParser implements LinkParser {
     
     List<LinkParser> linkParsers
 
@@ -9,8 +9,8 @@ class CompositeLinkParser implements LinkParser{
     }
 
     @Override
-    List<Link> parse(def html) {
-        List<Link> links = new ArrayList<>()
+    Set<Link> parse(def html) {
+        Set<Link> links = new LinkedHashSet<>()
         
         for (linkParser in linkParsers) {
             links.addAll(linkParser.parse(html))

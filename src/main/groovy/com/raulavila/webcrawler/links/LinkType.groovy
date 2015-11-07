@@ -1,7 +1,7 @@
 package com.raulavila.webcrawler.links
 
 enum LinkType {
-    NORMAL("Normal",
+    NORMAL("normal",
             { 
              it.name().toUpperCase() == "A" &&
              !it.@href.text().isEmpty() &&
@@ -13,9 +13,9 @@ enum LinkType {
                         url: it.@href.text()) 
             }),
     
-    IMAGE("Image", 
+    IMAGE("image",
           { 
-            it.name().toUpperCase() == "IMG" 
+            it.name().toUpperCase() == "IMG"
           },
           {
             new Link(type: LinkType.IMAGE,
@@ -40,6 +40,7 @@ enum LinkType {
     LinkType(String description,
              Closure filterClosure, 
              Closure extractClosure) {
+        
         this.description = description
         this.extractClosure = extractClosure
         this.filterClosure = filterClosure

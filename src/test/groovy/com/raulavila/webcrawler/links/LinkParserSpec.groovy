@@ -21,7 +21,7 @@ class LinkParserSpec extends Specification {
         )
         
         when: "We try to parse links from this page"
-        List<Link> links = linkParser.parse(html)
+        Set<Link> links = linkParser.parse(html)
         
         then: "an empty list is returned"
         links.isEmpty()
@@ -41,7 +41,7 @@ class LinkParserSpec extends Specification {
         )
 
         when: "We try to parse links from this page"
-        List<Link> links = linkParser.parse(html)
+        Set<Link> links = linkParser.parse(html)
 
         then: "a list with one link is returned"
         links.size() == 1
@@ -65,7 +65,7 @@ class LinkParserSpec extends Specification {
         )
 
         when: "We try to parse links from this page"
-        List<Link> links = linkParser.parse(html)
+        Set<Link> links = linkParser.parse(html)
 
         then: "a list with 3 links is returned"
         links.size() == 3

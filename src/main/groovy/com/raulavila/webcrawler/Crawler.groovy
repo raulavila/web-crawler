@@ -1,7 +1,5 @@
 package com.raulavila.webcrawler
 
-import com.raulavila.webcrawler.links.CompositeLinkParser
-import com.raulavila.webcrawler.links.ConcreteLinkParser
 import com.raulavila.webcrawler.links.Link
 import com.raulavila.webcrawler.links.LinkParser
 import com.raulavila.webcrawler.links.LinkType
@@ -14,8 +12,6 @@ class Crawler {
     LinkParser linkParser
     PageLoader pageLoader
 
-    Set<Link> visitedLinks = new HashSet<>()
-    
     Crawler(PageLoader pageLoader, LinkParser linkParser) {
         this.linkParser = linkParser
         this.pageLoader = pageLoader
@@ -24,30 +20,39 @@ class Crawler {
     String crawl(String rootUrl) {
         def writer = new StringWriter()
         def markup = new MarkupBuilder(writer)
-     
+
+        Set<Link> visitedLinks = new HashSet<>()
+
+        String pageTitle = "Map of the site $rootUrl"
+        
         markup.html {
+            title(pageTitle)
             body {
-                doCrawl(rootUrl, rootUrl, markup)
+                h1(pageTitle)
+                doCrawl(rootUrl, rootUrl, markup, visitedLinks)
             }
         }
 
         writer.toString()
     }
 
-    String doCrawl(String url, String rootUrl, def markup) {
+    String doCrawl(String url, String rootUrl, def markup, Set<Link> visitedLinks) {
         def html = pageLoader.load(url)
         
-        List<Link> links = linkParser.parse(html)
+        Set<Link> links = linkParser.parse(html)
 
         markup.ul {
             for(link in links) {
-                li("($link.type.description): $link.url")
+                li {
+                    span("$link.type.description: ")
+                    a(href:"$link.url","$link.url" )
+                }
 
-                if (shouldVisitLink(link, rootUrl)) {
+                if (shouldVisitLink(link, rootUrl, visitedLinks)) {
                     visitedLinks.add(link)
                     
                     try {
-                        doCrawl(link.url, rootUrl, markup)
+                        doCrawl(link.url, rootUrl, markup, visitedLinks)
                     } catch(Exception e){
                         log.warn("Problems visiting page " + link.url)
                     }
@@ -56,28 +61,9 @@ class Crawler {
         }
     }
 
-    boolean shouldVisitLink(Link link, String rootUrl) {
+    boolean shouldVisitLink(Link link, String rootUrl, Set<Link> visitedLinks) {
         link.type == LinkType.NORMAL &&
                 link.url.contains(rootUrl) &&
                 !visitedLinks.contains(link)
-    }
-
-    public static void main(String[] args) {
-        PageLoader pageLoader1 = new PageLoader()
-
-        List<LinkParser> linkParsers = new ArrayList<>()
-
-        for (LinkType linkType : LinkType.values()) {
-            LinkParser linkParser = new ConcreteLinkParser(linkType)
-            linkParsers << linkParser
-        }
-
-        CompositeLinkParser compositeLinkParser = new CompositeLinkParser(linkParsers)
-
-        def crawler = new Crawler(pageLoader1, compositeLinkParser)
-        def crawl = crawler.crawl("http://wiprodigital.com")
-
-        File file1 = new File('output.html')
-        file1 << crawl
     }
 }

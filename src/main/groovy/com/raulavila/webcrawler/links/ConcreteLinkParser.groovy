@@ -8,11 +8,12 @@ class ConcreteLinkParser implements LinkParser {
         this.linkConfig = linkConfig
     }
 
-    List<Link> parse(def html) {
+    Set<Link> parse(def html) {
         html."**"
             .findAll(
                     linkConfig.filterClosure)
             .collect(
-                    linkConfig.extractClosure)
+                    linkConfig.extractClosure) as LinkedHashSet
+
     }
 }
