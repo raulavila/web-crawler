@@ -6,7 +6,7 @@ import spock.lang.Subject
 class LinkParserSpec extends Specification {
 
     @Subject
-    LinkParser linkParser = new LinkParser(LinkType.NORMAL)
+    ConcreteLinkParser linkParser = new ConcreteLinkParser(LinkType.NORMAL)
     
     def "Try parsing links from page without links"() {
         given: "We have an HTML page with no links"
@@ -21,7 +21,7 @@ class LinkParserSpec extends Specification {
         )
         
         when: "We try to parse links from this page"
-        List<String> links = linkParser.parse(html)
+        List<Link> links = linkParser.parse(html)
         
         then: "an empty list is returned"
         links.isEmpty()
@@ -41,7 +41,7 @@ class LinkParserSpec extends Specification {
         )
 
         when: "We try to parse links from this page"
-        List<String> links = linkParser.parse(html)
+        List<Link> links = linkParser.parse(html)
 
         then: "a list with one link is returned"
         links.size() == 1
@@ -65,7 +65,7 @@ class LinkParserSpec extends Specification {
         )
 
         when: "We try to parse links from this page"
-        List<String> links = linkParser.parse(html)
+        List<Link> links = linkParser.parse(html)
 
         then: "a list with 3 links is returned"
         links.size() == 3

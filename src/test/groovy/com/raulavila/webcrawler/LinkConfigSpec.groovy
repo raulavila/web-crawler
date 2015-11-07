@@ -6,7 +6,7 @@ class LinkConfigSpec extends Specification {
 
     def "Extract normal link from page"() {
         given: "We instantiate a LinkParser for normal links"
-        LinkParser linkParser = new LinkParser(LinkType.NORMAL)
+        ConcreteLinkParser linkParser = new ConcreteLinkParser(LinkType.NORMAL)
         and: "we have an HTML page with one normal link"
         def html = new XmlSlurper().parseText(
             """
@@ -19,7 +19,7 @@ class LinkConfigSpec extends Specification {
         )
 
         when: "We try to parse links from this page"
-        List<String> links = linkParser.parse(html)
+        List<Link> links = linkParser.parse(html)
 
         then: "a list with one link is returned"
         links.size() == 1
@@ -29,7 +29,7 @@ class LinkConfigSpec extends Specification {
 
     def "Extract image links from page"() {
         given: "We instantiate a LinkParser for image links"
-        LinkParser linkParser = new LinkParser(LinkType.IMAGE)
+        ConcreteLinkParser linkParser = new ConcreteLinkParser(LinkType.IMAGE)
         and: "we have an HTML page with one image"
         def html = new XmlSlurper().parseText(
             """
@@ -42,7 +42,7 @@ class LinkConfigSpec extends Specification {
         )
 
         when: "We try to parse links from this page"
-        List<String> links = linkParser.parse(html)
+        List<Link> links = linkParser.parse(html)
 
         then: "a list with one link is returned"
         links.size() == 1
@@ -52,7 +52,7 @@ class LinkConfigSpec extends Specification {
 
     def "Extract CSS links from page"() {
         given: "We instantiate a LinkParser for CSS links"
-        LinkParser linkParser = new LinkParser(LinkType.CSS)
+        ConcreteLinkParser linkParser = new ConcreteLinkParser(LinkType.CSS)
         and: "we have an HTML page with one stylesheet link"
         def html = new XmlSlurper().parseText(
                 """
@@ -63,7 +63,7 @@ class LinkConfigSpec extends Specification {
         )
 
         when: "We try to parse links from this page"
-        List<String> links = linkParser.parse(html)
+        List<Link> links = linkParser.parse(html)
 
         then: "a list with one link is returned"
         links.size() == 1
