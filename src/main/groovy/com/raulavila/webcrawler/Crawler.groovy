@@ -74,7 +74,7 @@ class Crawler {
 
     private boolean shouldVisitLink(Link link, String rootUrl, Set<Link> visitedLinks) {
         link.type == LinkType.NORMAL &&
-                link.url.contains(rootUrl) &&
+                link.url.startsWith(rootUrl) &&
                 !visitedLinks.contains(link)
     }
 }

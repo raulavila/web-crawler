@@ -30,7 +30,7 @@ This is not a final version of the project, and several improvements can be made
 * The Crawler considers as different pages http://page1.com and http://www.page1.com
 * Same thing if the url contains query parameters, i.e. http://page1.com?param1=value, it would be considered a different page from http://page1.com
 * To avoid creating infinite loops, if a page has been visited is added to the map and ignored
-* If there's an error loading the page it's logged and ignored for the time being. The Crawler tries to navigate to files too (e.g. PDF's), same thing happens, error logged but link added to the map
+* If there's an error loading the page it's logged and ignored for the time being. The Crawler tries to navigate to files too (e.g. PDF's), same thing happens, error logged but link added to the map. For some reason, links with anchors at the end fail too (e.g. http://site.com/page/#anchor)
  
  I've tried to create a generic solution, so the only classes that should be modified in the future are `LinkType` and `Crawler`
  
