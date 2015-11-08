@@ -25,7 +25,7 @@ class CrawlerSpec extends Specification {
         pageLoader.load("http://root/page1") >> page1
     }
 
-    def "test"() {
+    def "crawler scans a site"() {
         given: "root contains a link to page1"
         Set<Link> linksRoot = [new Link(type: LinkType.NORMAL, url: "/page1")]
         linkParser.parse(rootPage) >> linksRoot
